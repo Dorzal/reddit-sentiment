@@ -3,6 +3,7 @@
 Projet en rapport au COVID19
 
 
-Pires Jean-Christope, Lardier Nicolas, Schweitzer Hugo, Linder Arnaud
+Chef de projet : Linder Arnaud,
+Pires Jean-Christope, Lardier Nicolas, Schweitzer Hugo
 
 
