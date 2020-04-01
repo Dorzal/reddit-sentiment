@@ -15,5 +15,7 @@ Développeur :
 *  Schweitzer Hugo
 
 
+Tâche à effectuer :
 
-
+* Récupérer les tweets en fonction du mot clé sur une durée.
+* 
