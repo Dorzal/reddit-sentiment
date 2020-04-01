@@ -1,0 +1,46 @@
+version: '3.3'
+
+networks:
+  default:
+    driver: bridge
+
+services:
+
+  http:
+    build: .docker/python
+    container_name: http
+    ports:
+      - '8000:8000'
+    volumes: 
+      - ./http:/usr/src/app
+    networks:
+      - default
+
+  crawler:
+    build: .docker/python
+    container_name: crawler
+    volumes: 
+      - ./crawler:/usr/src/app
+    networks:
+      - default
+
+  parser:
+    build: .docker/python
+    container_name: parser
+    volumes: 
+      - ./parser:/usr/src/app
+    networks:
+      - default
+
+  front:
+    image: nginx
+    container_name: front
+    restart: 'no'
+    ports:
+      - '80:80'
+    volumes:
+      - .docker/nginx:/etc/nginx/conf.d
+      - ./front:/var/www
+    networks:
+      - default
+  
