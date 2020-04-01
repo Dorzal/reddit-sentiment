@@ -17,5 +17,8 @@ Développeur :
 
 Tâche à effectuer :
 
-* Récupérer les tweets en fonction du mot clé sur une durée.
-* 
+* Faire un docker du projet
+* Récupérer les tweets en fonction du mot clé sur une durée donnée
+* Stocker les tweets dans la base données
+* Parser le tweet pour connaitre le sentiment
+* Création analytics en html
