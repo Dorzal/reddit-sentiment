@@ -1,0 +1,14 @@
+.vertical {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.vertical input {
+    width: 100%;
+    height: 40px;
+}
+
+.label {
+    font-size: 18px;
+    padding-bottom: 10px;
+}
