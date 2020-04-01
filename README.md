@@ -21,4 +21,15 @@ Tâche à effectuer :
 * Récupérer les tweets en fonction du mot clé sur une durée donnée
 * Stocker les tweets dans la base données
 * Parser le tweet pour connaitre le sentiment
-* Création analytics en html
+* Création des analytics
+* Tweeter le resultat (facultatif)
+
+```mermaid
+graph TD;
+  docker-->creation;
+  tweets-->recuperation;
+  recuperation-->parser;
+  parser-->stocker;
+  stocker-->analytics;
+  analytics-->tweeter
+```
