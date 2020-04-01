@@ -24,12 +24,7 @@ Tâche à effectuer :
 * Création des analytics
 * Tweeter le resultat (facultatif)
 
-```mermaid
-graph TD;
-  docker-->creation;
-  tweets-->recuperation;
-  recuperation-->parser;
-  parser-->stocker;
-  stocker-->analytics;
-  analytics-->tweeter
-```
+
+![infrastructure](https://cdn.discordapp.com/attachments/694457937070129155/694846598857097216/unknown.png)
+
+
