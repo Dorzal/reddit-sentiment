@@ -1,0 +1,5 @@
+pip
+pymongo
+pymongo['srv']
+praw
+MongoClient
