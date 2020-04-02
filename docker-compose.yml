@@ -37,10 +37,12 @@ services:
       context: .docker/python
       dockerfile: ./Dockerfile
       args:
-      - FOLDER=parser
+      - FOLDER=crawler_by_id
     container_name: crawler_by_id
     volumes: 
       - ./crawler_by_id:/usr/src/app
+    ports:
+      - 5000:5000
     networks:
       - default
 
