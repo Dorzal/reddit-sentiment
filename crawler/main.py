@@ -27,7 +27,7 @@ def recupDonnees ():
             if (not(comment.author == None) and (comment.score > 50)):
                 #On formate la date    
                 dateCom = datetime.fromtimestamp(comment.created)
-                jsonStr = {"title": post.title, "contenu": post.selftext, "reaction": comment.body, "date": format(dateCom), "score": comment.score, "social_network": 'REDDIT'}
+                jsonStr = {"title": post.title, "contenu": post.selftext, "reaction": comment.body, "date": dateCom, "score": comment.score, "social_network": 'REDDIT'}
                 #On vérifie que le commentaire n'existe pas
                 existing_document = collection.find_one(jsonStr)
                 if not existing_document:

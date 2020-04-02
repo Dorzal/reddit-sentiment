@@ -1,5 +1,2 @@
-pip
-pymongo
-pymongo['srv']
+pymongo[srv]
 praw
-MongoClient
