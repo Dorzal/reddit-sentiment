@@ -6,10 +6,7 @@ app = Flask(__name__)
 @app.route('/api/data')
 def getData():
     subject = request.args.get('subject')
-    if(subject):
-        return subject
-    else:
-        return 'rien'
+    DataService.retrieveData(subject)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
