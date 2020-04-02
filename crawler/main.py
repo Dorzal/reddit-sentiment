@@ -2,20 +2,9 @@ from  pymongo import MongoClient
 from pprint import pprint
 import praw
 from datetime import date
-
-class lePost:
-    sujet=''
-    contenu=''
-    reaction=''
-    date=''
-    score=0
-
-    def __init__(s,c,r,d,sco):
-        self.sujet = s
-        self.contenu = c
-        self.reaction = r
-        self.date = d
-        self.score = sco
+import json
+import bson 
+from bson.codec_options import CodecOptions
 
 #Connexion à la BDD
 client = MongoClient("mongodb+srv://sentiment:iYZQsvRbKy9SdXnx@python-9sotq.mongodb.net/test")
@@ -35,13 +24,5 @@ for post in hot_topic:
     comments = post.comments.list()
     for comment in comments:
         if comment.score > 1:
-            """print(30*'-')
-            print('Parent ID : ', comment.parent())
-            print('Comment ID : ', comment.id)
-            print(comment.body)"""
-            monObjet = lePost(post.title, post.selftext, comment.body, date.today(), post.score)
-            tabPost.append()
-
-for p in tabPost:
-    #print(p)
-    collection.insert_one(p)
+            jsonStr = bson.BSON.encode({'title': post.title, 'contenu': post.selftext, 'reaction': comment.body, 'date': format(date.today()), 'score': post.score})
+            collection.insert_one(jsonStr)
