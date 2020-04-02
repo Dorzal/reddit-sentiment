@@ -32,6 +32,18 @@ services:
     networks:
       - default
 
+  crawler_by_id:
+    build: 
+      context: .docker/python
+      dockerfile: ./Dockerfile
+      args:
+      - FOLDER=parser
+    container_name: crawler_by_id
+    volumes: 
+      - ./crawler_by_id:/usr/src/app
+    networks:
+      - default
+
   parser:
     build: 
       context: .docker/python
