@@ -11,5 +11,10 @@ def retrieveData(subject):
     myquery = { "sujet": rgx }
 
     mydoc = mycol.find(myquery)
+
+    response = list()
+
+    for x in mydoc:
+        response.__add__(x)
     
-    return mydoc
+    return response
