@@ -6,17 +6,13 @@ networks:
 
 services:
 
-  http:
-    build:
-      context: .docker/python
-      dockerfile: ./Dockerfile
-      args:
-      - FOLDER=http
-    container_name: http
+  flask:
+    build: .docker/flask
+    container_name: flask
     ports:
-      - '8000:8000'
+      - '5000:5000'
     volumes: 
-      - ./http:/usr/src/app
+      - ./http:/app
     networks:
       - default
 
