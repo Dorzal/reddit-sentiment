@@ -24,5 +24,6 @@ for post in hot_topic:
     comments = post.comments.list()
     for comment in comments:
         if comment.score > 1:
-            jsonStr = bson.BSON.encode({'title': post.title, 'contenu': post.selftext, 'reaction': comment.body, 'date': format(date.today()), 'score': post.score})
+            #jsonStr = bson.BSON.encode({'title': post.title, 'contenu': post.selftext, 'reaction': comment.body, 'date': format(date.today()), 'score': post.score})
+            jsonStr = {"title": post.title, "contenu": post.selftext, "reaction": comment.body, "date": format(date.today()), "score": post.score}
             collection.insert_one(jsonStr)
