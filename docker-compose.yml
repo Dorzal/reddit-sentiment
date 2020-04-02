@@ -7,7 +7,11 @@ networks:
 services:
 
   http:
-    build: .docker/python
+    build:
+      context: .docker/python
+      dockerfile: ./Dockerfile
+      args:
+      - FOLDER=http
     container_name: http
     ports:
       - '8000:8000'
@@ -17,7 +21,11 @@ services:
       - default
 
   crawler:
-    build: .docker/python
+    build: 
+      context: .docker/python
+      dockerfile: ./Dockerfile
+      args:
+      - FOLDER=crawler
     container_name: crawler
     volumes: 
       - ./crawler:/usr/src/app
@@ -25,7 +33,11 @@ services:
       - default
 
   parser:
-    build: .docker/python
+    build: 
+      context: .docker/python
+      dockerfile: ./Dockerfile
+      args:
+      - FOLDER=parser
     container_name: parser
     volumes: 
       - ./parser:/usr/src/app
@@ -40,7 +52,7 @@ services:
       - '80:80'
     volumes:
       - .docker/nginx:/etc/nginx/conf.d
-      - ./front:/var/www
+      - ./front/build:/var/www
     networks:
       - default
   
