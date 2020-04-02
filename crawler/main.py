@@ -36,4 +36,4 @@ def recupDonnees ():
 
 while True:
     recupDonnees()
-    time.sleep(1440)
+    time.sleep(3600)
