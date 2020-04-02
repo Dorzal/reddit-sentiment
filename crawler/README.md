@@ -1,0 +1,1 @@
+Ce dossier consiste à récupérer des données via l'API toute les 24h afin de les insérer dans la base de données.
