@@ -1,22 +1,55 @@
 from textblob import TextBlob
 from pymongo import MongoClient
-client = MongoClient("mongodb+srv://sentiment:iYZQsvRbKy9SdXnx@python-9sotq.mongodb.net/test")
-db = client.sentiments
+from pprint import pprint
+from bson.son import SON
+import json
 
-polarite = client.polarite
+client = MongoClient('mongodb+srv://sentiment:iYZQsvRbKy9SdXnx@python-9sotq.mongodb.net/test?authSource=admin&replicaSet=python-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true')
+result = client['sentiments']['crawl'].aggregate([
+    {
+        '$group': {
+            '_id': {
+                'day': {
+                    '$dayOfYear': '$date'
+                }, 
+                'hour': {
+                    '$hour': '$date'
+                }, 
+                'title': '$title'
+            },
+            'comments': {
+                '$push': {
+                    'date': '$date', 
+                    'reaction': '$reaction', 
+                    'title': '$title'
+                }
+            }
+        }
+    }, {
+        '$group': {
+            '_id': '$_id.title', 
+            'comments': {
+                '$push': '$$ROOT'
+            }
+        }
+    }
+])
 
-blob = TextBlob("hello")
+pprint(list(result))
 
-# if blob.detect_language() != 'en':
-#     blob_en = blob.translate(to='en')
-# else:
-#     blob_en = blob
-blob_en = blob
+# res = {}
+# for post in listPosts:
+#     for comment in post:
+#         blob = TextBlob(comment)
+#         for sentence in blob.sentences:
+#             print()
 
-blob_en.tags
-blob_en.noun_phrases
+# blob = TextBlob("hello")
 
-for sentence in blob_en.sentences:
-    if (sentence.sentiment.polarity != 0):
-        print(sentence)
-        print(sentence.sentiment.polarity)
+# blob.tags
+# blob.noun_phrases
+
+# for sentence in blob.sentences:
+#     if (sentence.sentiment.polarity != 0):
+#         print(sentence)
+#         print(sentence.sentiment.polarity)
