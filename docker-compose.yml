@@ -52,7 +52,7 @@ services:
       - '80:80'
     volumes:
       - .docker/nginx:/etc/nginx/conf.d
-      - ./front:/var/www
+      - ./front/build:/var/www
     networks:
       - default
   
