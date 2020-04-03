@@ -1,2 +1,4 @@
 flask-restful
 pymongo[srv]
+flask-cors
+requests
