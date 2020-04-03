@@ -37,8 +37,6 @@ services:
     container_name: crawler_by_id
     volumes: 
       - ./crawler_by_id:/usr/src/app
-    ports:
-      - 5000:5000
     networks:
       - default
 
