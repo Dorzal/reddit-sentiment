@@ -15,6 +15,8 @@ services:
       - ./http:/app
     networks:
       - default
+    environment:
+      - MONGO_CONNECTION_STRING=${MONGO_CONNECTION_STRING}
 
   crawler:
     build: 
@@ -27,6 +29,10 @@ services:
       - ./crawler:/usr/src/app
     networks:
       - default
+    environment:
+      - MONGO_CONNECTION_STRING=${MONGO_CONNECTION_STRING}
+      - REDDIT_CLIENT=${REDDIT_CLIENT}
+      - REDDIT_SECRET=${REDDIT_SECRET}
 
   crawler_by_id:
     build: 
@@ -39,17 +45,22 @@ services:
       - ./crawler_by_id:/usr/src/app
     networks:
       - default
+    environment:
+      - MONGO_CONNECTION_STRING=${MONGO_CONNECTION_STRING}
+      - REDDIT_CLIENT=${REDDIT_CLIENT}
+      - REDDIT_SECRET=${REDDIT_SECRET}
 
   parser:
     build: 
       context: .docker/python/parser
       dockerfile: ./Dockerfile
-      
-    container_name: parser
     volumes: 
       - ./parser:/usr/src/app
     networks:
       - default
+    environment:
+      - MONGO_CONNECTION_STRING=${MONGO_CONNECTION_STRING}
+    
 
   front:
     image: nginx
@@ -62,4 +73,5 @@ services:
       - ./front/build:/var/www
     networks:
       - default
+    
   
