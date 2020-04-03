@@ -42,10 +42,9 @@ services:
 
   parser:
     build: 
-      context: .docker/python
+      context: .docker/python/parser
       dockerfile: ./Dockerfile
-      args:
-      - FOLDER=parser
+      
     container_name: parser
     volumes: 
       - ./parser:/usr/src/app

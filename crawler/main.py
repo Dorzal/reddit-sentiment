@@ -15,7 +15,7 @@ def recupDonnees ():
 
     #Catégorie de récupération
     subreddit = reddit.subreddit('news')
-    hot_topic = subreddit.hot(limit=2)
+    hot_topic = subreddit.hot(limit=10)
 
     #Récupération des infos
     for post in hot_topic:

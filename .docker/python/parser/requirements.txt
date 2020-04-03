@@ -1,4 +1,5 @@
 textblob
-pymongo
+nltk
+pymongo[srv]
 pprint
 datetime

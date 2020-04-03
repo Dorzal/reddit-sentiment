@@ -20,16 +20,20 @@ def retrieveData(subject):
 
     mydoc = collection.find(myquery).sort("date")
     output = []
-    if(mydoc):
+    print("MYDOC", mydoc)
+    if(mydoc.count() > 0):
+        print("IF")
         for x in mydoc:
             output.append({'title' : x['title'], 'date' : x['date'], 'polarite' : x['polarite'], 'social_network' : x['social_network']})
         return jsonify({'result' : output})
     else:
+        print("ELSE")
         callCrawler(subject)
-        return jsonify({'result' : false})
+        return jsonify({'result': False})
 
 def callCrawler(subject):
     url = "http://crawler_by_id:5000"
     data = {"search": subject}
-
-    requests.post(url, data)
+    print data   
+    response = requests.post(url, data)
+    print response

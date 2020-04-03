@@ -3,6 +3,8 @@ import praw
 from datetime import datetime
 from flask import Flask, json, request
 from praw.models import MoreComments
+from flask_cors import CORS
+
 #Connexion à la BDD
 client = MongoClient("mongodb+srv://sentiment:iYZQsvRbKy9SdXnx@python-9sotq.mongodb.net/test")
 db = client["sentiments"]
@@ -25,27 +27,32 @@ def callSocialNetwork(recherche):
             # On check que le prochain commentaire n'est pas un MoreComments
             if isinstance(comment, MoreComments):
                 continue
-            if comment.score > 10:
-                #On formate la date    
-                dateCom = datetime.fromtimestamp(comment.created)
-                jsonStr = {
-                    "title": post.title,
-                    "contenu": post.selftext,
-                    "reaction": comment.body,
-                    "date": dateCom,
-                    "score": comment.score,
-                    "social_network": 'REDDIT'
-                }
-                #On vérifie que le commentaire n'existe pas
-                existing_document = collection.find_one(jsonStr)
-                if not existing_document:
-                    #On insère la donnée dans la BDD
-                    collection.insert_one(jsonStr)
+            
+                
+            #On formate la date    
+            dateCom = datetime.fromtimestamp(comment.created)
+            jsonStr = {
+                "title": post.title,
+                "contenu": post.selftext,
+                "reaction": comment.body,
+                "date": dateCom,
+                "score": comment.score,
+                "social_network": 'REDDIT'
+            }
+            #On vérifie que le commentaire n'existe pas
+            existing_document = collection.find_one(jsonStr)
+            print("existing_document : ", existing_document)
+
+            if not existing_document:
+                print("jsonStr : ", jsonStr)    
+                #On insère la donnée dans la BDD
+                collection.insert_one(jsonStr)
 
 
 
 #Creation de l'api
 api = Flask(__name__)
+CORS(api)
 
 @api.route('/hello')
 def hello_world():
