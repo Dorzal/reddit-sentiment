@@ -1,10 +1,14 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import style from './style.css'
+import Loader from '../../atomics/loader'
 import Formulaires from '../../organisms/formulaires';
 import Titles from '../../atomics/titles';
 import Statistiques from '../../organisms/statistiques';
-
+import moment from 'moment'
+import ReactNotifications, {store} from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css'
+import 'animate.css';
 
 const initialState = {
     labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Setptembre', 'Octobre', 'Novembre', 'Décembre'],
@@ -22,20 +26,39 @@ const initialState = {
   };
 
 export default () => {
+	const [loading, setLoading] = useState(false)
 	const [results, setResults] = useState(initialState)
 	const [inputval, setInputVal] = useState('');
 
 	const rechercher = () => {
+		setLoading(true);
 		
-		changeGraphiqueDatas([0.1, 0.3, 0.42, 0.45, 0.6, 0.1, -0.5, -2, 1, 1.5, -0.30, -0.1])
-		fetch(`http://localhost:5000/api/data?subject=${inputval}`)
+		fetch(`http://localhost:5000/api/data?sujet=${inputval}`)
 		.then(response => response.json())
 		.then(json => {
-			//
+			if (json.result == false) {
+				store.addNotification({
+					message: 'Nous collectons les données merci de rééssayer dans quelques secondes',
+					insert: "top",
+  					container: "top-right",
+					type: 'info',                         // 'default', 'success', 'info', 'warning'
+					animationIn: ["animated", "fadeIn"],     // animate.css classes that's applied
+					animationOut: ["animated", "fadeOut"],   // animate.css classes that's applied
+					dismiss: {
+					  duration: 3000 
+					}
+				  })
+			} else {
+				let labels = json.result.map(res => { return moment(res.date).format('MMMM Do YYYY, h')})
+				let datas = json.result.map(res => { return res.polarite})
+				changeGraphiqueDatas(labels, datas);
+			}
+			setLoading(false);
 		})
+		
 	}
 
-	const changeGraphiqueDatas = (newDatasets) => {
+	const changeGraphiqueDatas = (newLabels, newDatasets) => {
 		var oldDataSet = results.datasets[0];
 		var newData = newDatasets;
 		var newDataSet = {
@@ -44,6 +67,7 @@ export default () => {
 		newDataSet.data = newData;
 		var newState = {
 			...initialState,
+			labels: newLabels,
 			datasets: [newDataSet]
 		};
 
@@ -53,6 +77,7 @@ export default () => {
 	return (
 		<div id={style.content}>
 			<div>
+				<ReactNotifications />
 				<Formulaires.Recherche
 					inputVal={inputval}
 					onValid={(val) => rechercher(val)}
@@ -61,6 +86,7 @@ export default () => {
 					style={{formulaire: style.formulaire, input: style.input, label: style.label}}
 				/>
 				<Statistiques.Graphique results={results}/>
+				<Loader.Fullscreen loading={loading}/>
 			</div> 
 			
 		</div>
