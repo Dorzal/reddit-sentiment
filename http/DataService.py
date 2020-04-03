@@ -4,6 +4,7 @@ from pymongo import MongoClient
 import re
 import requests
 import json
+from flask import jsonify
 
 
 def retrieveData(subject):
@@ -15,13 +16,14 @@ def retrieveData(subject):
 
     rgx = re.compile('.*'+subject+'.*', re.IGNORECASE)
 
-    myquery = { "sujet": rgx }
+    myquery = { "title": rgx }
 
-    mydoc = collection.find(myquery)
-
+    mydoc = collection.find(myquery).sort("date")
+    output = []
     if(mydoc):
         for x in mydoc:
-            return x
+            output.append({'title' : x['title'], 'date' : x['date'], 'polarite' : x['polarite'], 'social_network' : x['social_network']})
+        return jsonify({'result' : output})
     else:
         callCrawler(subject)
         return 'loader'
