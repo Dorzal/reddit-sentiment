@@ -25,6 +25,4 @@ Tâche à effectuer :
 * Tweeter le resultat (facultatif)
 
 
-![infrastructure](https://cdn.discordapp.com/attachments/694457937070129155/695246451566968862/unknown.png)
-
-
+![infrastructure](https://cdn.discordapp.com/attachments/694457937070129155/694846598857097216/unknown.png)

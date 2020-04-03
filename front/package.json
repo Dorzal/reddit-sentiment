@@ -27,10 +27,16 @@
     "sirv-cli": "^0.4.5"
   },
   "dependencies": {
+    "animate.css": "^3.7.2",
     "chart.js": "^2.9.3",
+    "moment": "^2.24.0",
     "preact": "^10.3.2",
     "preact-render-to-string": "^5.1.4",
     "preact-router": "^3.2.1",
-    "react-chartjs-3": "^2.7.7"
+    "react-chartjs-3": "^2.7.7",
+    "react-loader-spinner": "^3.1.5",
+    "react-notification-system": "^0.3.0",
+    "react-notification-system-redux": "^2.0.1",
+    "react-notifications-component": "^2.4.0"
   }
 }

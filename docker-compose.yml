@@ -6,26 +6,45 @@ networks:
 
 services:
 
-  http:
-    build: .docker/python
-    container_name: http
+  flask:
+    build: .docker/flask
+    container_name: flask
     ports:
-      - '8000:8000'
+      - '5000:5000'
     volumes: 
-      - ./http:/usr/src/app
+      - ./http:/app
     networks:
       - default
 
   crawler:
-    build: .docker/python
+    build: 
+      context: .docker/python
+      dockerfile: ./Dockerfile
+      args:
+      - FOLDER=crawler
     container_name: crawler
     volumes: 
       - ./crawler:/usr/src/app
     networks:
       - default
 
+  crawler_by_id:
+    build: 
+      context: .docker/python
+      dockerfile: ./Dockerfile
+      args:
+      - FOLDER=crawler_by_id
+    container_name: crawler_by_id
+    volumes: 
+      - ./crawler_by_id:/usr/src/app
+    networks:
+      - default
+
   parser:
-    build: .docker/python
+    build: 
+      context: .docker/python/parser
+      dockerfile: ./Dockerfile
+      
     container_name: parser
     volumes: 
       - ./parser:/usr/src/app

@@ -1,0 +1,4 @@
+pymongo[srv]
+praw
+flask-cors
+flask
