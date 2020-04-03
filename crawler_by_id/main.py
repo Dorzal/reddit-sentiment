@@ -41,10 +41,8 @@ def callSocialNetwork(recherche):
             }
             #On vérifie que le commentaire n'existe pas
             existing_document = collection.find_one(jsonStr)
-            print("existing_document : ", existing_document)
 
-            if not existing_document:
-                print("jsonStr : ", jsonStr)    
+            if not existing_document:   
                 #On insère la donnée dans la BDD
                 collection.insert_one(jsonStr)
 
