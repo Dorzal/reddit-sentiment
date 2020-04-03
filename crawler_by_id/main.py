@@ -32,7 +32,7 @@ def callSocialNetwork(recherche):
                     "title": post.title,
                     "contenu": post.selftext,
                     "reaction": comment.body,
-                    "date": format(dateCom),
+                    "date": dateCom,
                     "score": comment.score,
                     "social_network": 'REDDIT'
                 }
