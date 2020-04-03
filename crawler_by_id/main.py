@@ -4,14 +4,14 @@ from datetime import datetime
 from flask import Flask, json, request
 from praw.models import MoreComments
 from flask_cors import CORS
-
+import os
 #Connexion à la BDD
-client = MongoClient("mongodb+srv://sentiment:iYZQsvRbKy9SdXnx@python-9sotq.mongodb.net/test")
+client = MongoClient(os.environ["MONGO_CONNECTION_STRING"])
 db = client["sentiments"]
 collection = db["crawl"]
 
 #Récupération des topics reddit
-reddit = praw.Reddit(client_id ='fEQd43i9zHyhqA', client_secret='LpLwmKtOuUmrfdqhrlnYt8znvk4', user_agent='ProjetTendanceV1')
+reddit = praw.Reddit(client_id=os.environ["REDDIT_CLIENT"], client_secret=os.environ["REDDIT_SECRET"], user_agent='ProjetTendanceV1')
 
 def callSocialNetwork(recherche):
 

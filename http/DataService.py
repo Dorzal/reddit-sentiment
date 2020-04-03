@@ -5,12 +5,13 @@ import re
 import requests
 import json
 from flask import jsonify
+import os
 
 
 def retrieveData(subject):
 
 
-    client = MongoClient("mongodb+srv://sentiment:iYZQsvRbKy9SdXnx@python-9sotq.mongodb.net/test")
+    client = MongoClient(os.environ["MONGO_CONNECTION_STRING"])
     db = client["sentiments"]
     collection = db["polarite"]
 

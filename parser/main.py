@@ -3,8 +3,9 @@ from pymongo import MongoClient
 from pprint import pprint
 import datetime
 import time
-
-client = MongoClient('mongodb+srv://sentiment:iYZQsvRbKy9SdXnx@python-9sotq.mongodb.net/test')
+import os
+#Connexion à la BDD
+client = MongoClient(os.environ["MONGO_CONNECTION_STRING"])
 crawl = client['sentiments']['crawl']
 polarite = client['sentiments']['polarite']
 
