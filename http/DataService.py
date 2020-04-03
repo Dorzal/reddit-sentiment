@@ -26,7 +26,7 @@ def retrieveData(subject):
         return jsonify({'result' : output})
     else:
         callCrawler(subject)
-        return false
+        return jsonify({'result' : false})
 
 def callCrawler(subject):
     url = "http://crawler_by_id:5000"
