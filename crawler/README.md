@@ -1,1 +1,1 @@
-Ce dossier consiste à récupérer des données via l'API toute les 24h afin de les insérer dans la base de données.
+Ce service consiste à récupérer des données via l'API Reddit actuellement toutes les heures afin de les insérer dans la base de données.
