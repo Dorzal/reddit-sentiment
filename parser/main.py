@@ -1,9 +1,7 @@
 from textblob import TextBlob
 from pymongo import MongoClient
 from pprint import pprint
-from bson.son import SON
 import datetime
-import json
 
 client = MongoClient('mongodb+srv://sentiment:iYZQsvRbKy9SdXnx@python-9sotq.mongodb.net/test')
 crawl = client['sentiments']['crawl']
