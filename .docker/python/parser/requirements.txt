@@ -1,0 +1,4 @@
+textblob
+pymongo
+pprint
+datetime
